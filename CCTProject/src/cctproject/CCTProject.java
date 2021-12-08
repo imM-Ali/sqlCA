@@ -27,7 +27,7 @@ public class CCTProject {
     static Scanner scan = new Scanner(System.in);
     static final String dbURL = "jdbc:mysql://localhost:3306/users";
     static final String username = "root";
-    static final String password = "admin";
+    static final String password = "admin123";
     static Connection conn;
     static menuOptions menu = new menuOptions();
     static int user = 0;
@@ -73,10 +73,7 @@ public class CCTProject {
 
     }
 
-    private static boolean Update(Connection conn) {
-        String sql = "UPDATE user SET age = 30 WHERE id in (100, 101)";
-        return false;
-    }
+   
 
     private static int loginInit() {
 
