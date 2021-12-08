@@ -62,6 +62,7 @@ public class menuOptions {
                 if (tbr != user) {
                     st.executeUpdate("Delete from user where id=" + tbr);
                     System.out.println("user removed");
+                    option = "n";
                 } else {
                     System.out.println("Cannot delete your own account");
                 }
