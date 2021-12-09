@@ -23,7 +23,6 @@ import java.util.logging.Logger;
  */
 public class CCTProject {
 
-    
     static Scanner scan = new Scanner(System.in);
     static final String dbURL = "jdbc:mysql://localhost:3306/users";
     static final String username = "root";
@@ -50,7 +49,7 @@ public class CCTProject {
 
                         String sql = "Select * from user Where username='" + details[0].replace("{", "") + "' and password='" + details[1].replace("}", "") + "'";
                         ResultSet rs = statement.executeQuery(sql);
-                        
+
                         if (rs.next()) {
                             user = rs.getInt(1);
                             System.out.println("Logged in! Please wait...");
@@ -73,7 +72,6 @@ public class CCTProject {
 
     }
 
- 
     private static int loginInit() {
 
         System.out.println("****WELCOME****\nPlease select an option\n1- Login\n2- Sign Up");
@@ -123,15 +121,14 @@ public class CCTProject {
                     menu.profileModifier(rs);
                     break;
                 case 2:
-                    menu.viewUsers(conn);                    
+                    menu.viewUsers(conn);
                     break;
             }
 
         } //building UI if usertype is 'member'
         else {
             //display menu
-            
-          
+
             switch (menu.displayOptions(rs)) {
                 case 1:
                     menu.equationSolver();
@@ -142,6 +139,5 @@ public class CCTProject {
         }
 
     }
-
 
 }
