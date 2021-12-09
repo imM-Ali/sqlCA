@@ -36,6 +36,8 @@ public class menuOptions {
         ArrayList<String> equation2 = new ArrayList<String>();
         equationFormatter(equation1);
         equationFormatter(equation2);
+        
+        //multiplying equation 2 with co-efficient of Y from equation 1
         for(int i=0;i<=6;i+=3){
             int element =Integer.parseInt(equation2.get(i));
             int yCOF = Integer.parseInt(equation1.get(3));
