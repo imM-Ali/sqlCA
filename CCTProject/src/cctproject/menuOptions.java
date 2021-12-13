@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  *
@@ -32,53 +31,7 @@ public class menuOptions {
     }
 
     public void equationSolver() {
-        ArrayList<String> equation1 = new ArrayList<String>();
-        ArrayList<String> equation2 = new ArrayList<String>();
-        equationFormatter(equation1);
-        equationFormatter(equation2);
-        
-        //multiplying equation 2 with co-efficient of Y from equation 1
-        for(int i=0;i<=6;i+=3){
-            int element =Integer.parseInt(equation2.get(i));
-            int yCOF = Integer.parseInt(equation1.get(3));
-            element = element*yCOF;
-            equation2.set(i, Integer.toString(element));            
-        }
-        System.out.println("New EQ 2: ");
-        equation2.forEach(e->System.out.print(e));
-    }
-
-    private static void equationFormatter(ArrayList<String> equation) {
-        System.out.println("Please enter number of characters on the left of '='\nRemember!! \n1) +/- are also characters \n2) co-efficient cannot be nil\n3)Enter the equation with the greater Y co-efficient first");
-        int size = scan.nextInt();
-        if (size < 7) {
-            System.out.println("SYNTAX : AX+BY=C");
-        } else {
-            System.out.println("SYNTAX : AX+BY+C=0");
-        }
-
-        System.out.println("Enter value of a");
-        equation.add(scan.next());
-        System.out.println("Enter value of x");
-        equation.add(scan.next());
-        System.out.println("Enter value of operator +/-");
-        equation.add(scan.next());
-        System.out.println("Enter value of b");
-        equation.add(scan.next());
-        System.out.println("Enter value of y");
-        equation.add(scan.next());
-        if (size < 7) {
-            equation.add("=");
-        } else {
-            System.out.println("Enter value of operator +/-");
-            equation.add(scan.next());
-            equation.add("=");
-            equation.add("0");
-
-        }
-        System.out.println("Enter value of c");
-        equation.add(scan.next());
-        equation.forEach(e -> System.out.print(e));
+        System.out.print("Equation : ");
     }
 
     public void profileModifier(ResultSet rs) throws SQLException {
@@ -109,7 +62,6 @@ public class menuOptions {
                 if (tbr != user) {
                     st.executeUpdate("Delete from user where id=" + tbr);
                     System.out.println("user removed");
-                    option = "n";
                 } else {
                     System.out.println("Cannot delete your own account");
                 }

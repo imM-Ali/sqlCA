@@ -23,10 +23,11 @@ import java.util.logging.Logger;
  */
 public class CCTProject {
 
+    
     static Scanner scan = new Scanner(System.in);
     static final String dbURL = "jdbc:mysql://localhost:3306/users";
     static final String username = "root";
-    static final String password = "admin123";
+    static final String password = "admin";
     static Connection conn;
     static menuOptions menu = new menuOptions();
     static int user = 0;
@@ -49,7 +50,7 @@ public class CCTProject {
 
                         String sql = "Select * from user Where username='" + details[0].replace("{", "") + "' and password='" + details[1].replace("}", "") + "'";
                         ResultSet rs = statement.executeQuery(sql);
-
+                        
                         if (rs.next()) {
                             user = rs.getInt(1);
                             System.out.println("Logged in! Please wait...");
@@ -70,6 +71,11 @@ public class CCTProject {
                 break;
         }
 
+    }
+
+    private static boolean Update(Connection conn) {
+        String sql = "UPDATE user SET age = 30 WHERE id in (100, 101)";
+        return false;
     }
 
     private static int loginInit() {
@@ -121,14 +127,15 @@ public class CCTProject {
                     menu.profileModifier(rs);
                     break;
                 case 2:
-                    menu.viewUsers(conn);
+                    menu.viewUsers(conn);                    
                     break;
             }
 
         } //building UI if usertype is 'member'
         else {
             //display menu
-
+            
+          
             switch (menu.displayOptions(rs)) {
                 case 1:
                     menu.equationSolver();
@@ -139,5 +146,6 @@ public class CCTProject {
         }
 
     }
+
 
 }
