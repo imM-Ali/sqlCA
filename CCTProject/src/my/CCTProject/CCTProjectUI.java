@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -41,7 +42,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     public CCTProjectUI() throws SQLException {
        
         initComponents();
-        
+        Stack<JPanel> panels = new Stack<JPanel>();
+        panels.push(panel_1);
+        panels.push(panel_2);
+        panels.push(panel_3);
+        panels.push(panel_4);
         //display only welcome screen
         welcome_panel.setVisible(true);
         panel_1.setVisible(false);
@@ -72,6 +77,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         login_btn2 = new javax.swing.JButton();
         login_password = new javax.swing.JPasswordField();
         error = new javax.swing.JLabel();
+        back_btn_1 = new javax.swing.JLabel();
         panel_2 = new javax.swing.JPanel();
         logged_in_msg = new javax.swing.JLabel();
         logged_in_username = new javax.swing.JLabel();
@@ -180,6 +186,8 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             }
         });
 
+        back_btn_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CCTProject/images/arrow.png"))); // NOI18N
+
         javax.swing.GroupLayout panel_1Layout = new javax.swing.GroupLayout(panel_1);
         panel_1.setLayout(panel_1Layout);
         panel_1Layout.setHorizontalGroup(
@@ -190,7 +198,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                     .addGroup(panel_1Layout.createSequentialGroup()
                         .addComponent(login_username_label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(login_username))
+                        .addComponent(login_username, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
                     .addGroup(panel_1Layout.createSequentialGroup()
                         .addComponent(login_password_label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -198,6 +206,10 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                             .addComponent(login_btn2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                             .addComponent(login_password))))
                 .addGap(93, 93, 93))
+            .addGroup(panel_1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(back_btn_1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_1Layout.createSequentialGroup()
                     .addContainerGap(149, Short.MAX_VALUE)
@@ -207,7 +219,9 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         panel_1Layout.setVerticalGroup(
             panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(15, 15, 15)
+                .addComponent(back_btn_1)
+                .addGap(48, 48, 48)
                 .addGroup(panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login_username_label)
                     .addComponent(login_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,7 +231,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                     .addComponent(login_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(login_btn2)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
             .addGroup(panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_1Layout.createSequentialGroup()
                     .addContainerGap(152, Short.MAX_VALUE)
@@ -405,7 +419,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         wrapper.setLayout(wrapperLayout);
         wrapperLayout.setHorizontalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 508, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
             .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addContainerGap()
@@ -429,7 +443,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         );
         wrapperLayout.setVerticalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 418, Short.MAX_VALUE)
+            .addGap(0, 425, Short.MAX_VALUE)
             .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addGap(60, 60, 60)
@@ -609,6 +623,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     private void switchPanel(JPanel old, JPanel next) {
         old.setVisible(false);
         next.setVisible(true);
+        
     }
 
    
@@ -656,6 +671,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel back_btn_1;
     private javax.swing.JLabel current_time;
     private javax.swing.JLabel error;
     private javax.swing.JScrollPane jScrollPane1;
