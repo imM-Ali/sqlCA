@@ -32,7 +32,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     Statement statement = connectDB().createStatement(
             ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE);
-    int userId;
+    int userType;
     ResultSet rs;
     Stack<JPanel> panels = new Stack<JPanel>();
 
@@ -133,7 +133,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         welcome_panelLayout.setHorizontalGroup(
             welcome_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcome_panelLayout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
+                .addContainerGap(304, Short.MAX_VALUE)
                 .addGroup(welcome_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(signup_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(login_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -437,7 +437,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         wrapper.setLayout(wrapperLayout);
         wrapperLayout.setHorizontalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
             .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addContainerGap()
@@ -461,7 +461,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         );
         wrapperLayout.setVerticalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
             .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addGap(60, 60, 60)
@@ -488,7 +488,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -502,7 +502,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -512,7 +512,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(32, 32, 32)
                     .addComponent(welcome_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(46, Short.MAX_VALUE)))
+                    .addContainerGap(82, Short.MAX_VALUE)))
         );
 
         pack();
@@ -558,10 +558,17 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             try {
                 rs = statement.executeQuery(sql);
                 if (rs.next()) {
-                    userId = rs.getInt(1);
+                    userType = rs.getInt(2);
+                    //admin
+                    if (userType == 1) {
+
+                    } //member
+                    else {
+                        switchPanel(panel_1, panel_2);
+                        logged_in_username.setText("Mr. / Ms./ " + rs.getString(3));
+                    }
                     //display info panel
-                    switchPanel(panel_1, panel_2);
-                    logged_in_username.setText("Mr. / Ms./ " + rs.getString(3));
+
                 } else {
                     error.setText("Incorrect username or password, try again");
                 }
