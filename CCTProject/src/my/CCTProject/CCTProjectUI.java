@@ -29,16 +29,15 @@ import net.proteanit.sql.DbUtils;
  */
 public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
+    //initial statement 
     Statement statement = connectDB().createStatement(
             ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE);
     int userType;
     ResultSet rs;
+    //stack to store all the windows turn by turn
     Stack<JPanel> panels = new Stack<JPanel>();
 
-    /**
-     * Creates new form CCTProjectUI
-     */
     public CCTProjectUI() throws SQLException {
 
         initComponents();
@@ -52,7 +51,6 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         modify_success.setVisible(false);
         panel_5.setVisible(false);
 
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -598,8 +596,9 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
 
     }//GEN-LAST:event_login_btnMouseClicked
-
+    
     private void login_usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusGained
+        //clears username field on click
         error.setText("");
         String username = login_username.getText().trim().toLowerCase();
         if (username.equals("username")) {
@@ -610,7 +609,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }//GEN-LAST:event_login_usernameFocusGained
 
     private void login_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusLost
-        // TODO add your handling code here:
+        // fills username field with a placeholder if it is empty
         String username = login_username.getText().trim().toLowerCase();
         if (username.equals("")) {
             login_username.setText("username");
@@ -634,11 +633,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                     if (userType == 1) {
                         switchPanel(panel_1, panel_3);
                         logged_in_username.setText("Admin - " + rs.getString(3));
-                        
+
                     } //member
                     else {
                         switchPanel(panel_1, panel_2);
-                        member_welcome.setText("Welcome, how are you " + rs.getString(3) +"?");
+                        member_welcome.setText("Welcome, how are you " + rs.getString(3) + "?");
                     }
                     //display info panel
 

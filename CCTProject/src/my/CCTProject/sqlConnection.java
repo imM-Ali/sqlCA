@@ -16,15 +16,15 @@ import java.sql.Statement;
  * @author Ali
  */
 public interface sqlConnection {
-    
-    public static Connection connectDB() throws SQLException{
-     String dbURL = "jdbc:mysql://localhost:3306/users";
-    String username = "root";
-    String password = "admin";
-    Connection conn;
-    conn = DriverManager.getConnection(dbURL, username, password);
-    return conn;
-        
+
+    public static Connection connectDB() throws SQLException {
+        String dbURL = "jdbc:mysql://localhost:3306/users";
+        String username = "root";
+        String password = "admin";
+        Connection conn;
+        conn = DriverManager.getConnection(dbURL, username, password);
+        return conn;
+
     }
-    
+
 }
