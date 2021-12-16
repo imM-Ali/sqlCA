@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,6 +45,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
         //display only welcome screen
         welcome_panel.setVisible(true);
+        panel_0.setVisible(false);
         panel_1.setVisible(false);
         panel_2.setVisible(false);
         panel_3.setVisible(false);
@@ -63,6 +65,18 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         signup_btn = new javax.swing.JButton();
         current_time = new javax.swing.JLabel();
         wrapper = new javax.swing.JPanel();
+        panel_0 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        fname_value = new javax.swing.JTextField();
+        lname_value = new javax.swing.JTextField();
+        uname_value = new javax.swing.JTextField();
+        pass_value = new javax.swing.JPasswordField();
+        signup_btn2 = new javax.swing.JButton();
+        login_btn_signup = new javax.swing.JButton();
+        signup_success = new javax.swing.JLabel();
         panel_1 = new javax.swing.JPanel();
         login_username_label = new javax.swing.JLabel();
         login_password_label = new javax.swing.JLabel();
@@ -71,6 +85,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         login_password = new javax.swing.JPasswordField();
         error = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
+        signup_btn_lgin = new javax.swing.JButton();
         panel_2 = new javax.swing.JPanel();
         member_welcome = new javax.swing.JLabel();
         member_modify = new javax.swing.JButton();
@@ -160,6 +175,90 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addContainerGap(127, Short.MAX_VALUE))
         );
 
+        jLabel1.setText("First Name");
+
+        jLabel2.setText("Last Name");
+
+        jLabel3.setText("username");
+
+        jLabel4.setText("Password");
+
+        signup_btn2.setText("Sign up");
+        signup_btn2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signup_btn2MouseClicked(evt);
+            }
+        });
+
+        login_btn_signup.setText("Log in");
+        login_btn_signup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                login_btn_signupMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_0Layout = new javax.swing.GroupLayout(panel_0);
+        panel_0.setLayout(panel_0Layout);
+        panel_0Layout.setHorizontalGroup(
+            panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_0Layout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addGroup(panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panel_0Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(uname_value))
+                    .addGroup(panel_0Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lname_value))
+                    .addGroup(panel_0Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fname_value, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_0Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pass_value))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_0Layout.createSequentialGroup()
+                        .addGroup(panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(signup_btn2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(login_btn_signup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_0Layout.createSequentialGroup()
+                .addContainerGap(208, Short.MAX_VALUE)
+                .addComponent(signup_success, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133))
+        );
+        panel_0Layout.setVerticalGroup(
+            panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_0Layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addGroup(panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(fname_value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lname_value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(uname_value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(pass_value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(signup_success, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(signup_btn2)
+                .addGap(18, 18, 18)
+                .addComponent(login_btn_signup)
+                .addContainerGap(100, Short.MAX_VALUE))
+        );
+
         login_username_label.setText("Username");
 
         login_password_label.setText("Password");
@@ -187,14 +286,17 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CCTProject/images/logo.jpg"))); // NOI18N
 
+        signup_btn_lgin.setText("Sign up");
+        signup_btn_lgin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signup_btn_lginMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_1Layout = new javax.swing.GroupLayout(panel_1);
         panel_1.setLayout(panel_1Layout);
         panel_1Layout.setHorizontalGroup(
             panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
             .addGroup(panel_1Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addGroup(panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,8 +314,13 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(login_btn2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                                    .addComponent(login_password))))
+                                    .addComponent(login_password)
+                                    .addComponent(signup_btn_lgin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(93, 93, 93))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130))
         );
         panel_1Layout.setVerticalGroup(
             panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +338,9 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(login_btn2)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(signup_btn_lgin)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         member_welcome.setToolTipText("");
@@ -258,26 +367,28 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             panel_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_2Layout.createSequentialGroup()
                 .addGap(251, 251, 251)
-                .addGroup(panel_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(member_welcome, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(member_equation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(member_modify, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                        .addComponent(sign_out_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addGroup(panel_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(member_equation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(member_modify, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                    .addComponent(sign_out_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_2Layout.createSequentialGroup()
+                .addContainerGap(173, Short.MAX_VALUE)
+                .addComponent(member_welcome, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
         panel_2Layout.setVerticalGroup(
             panel_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_2Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
-                .addComponent(member_welcome, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addComponent(member_welcome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(member_modify, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(member_equation, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
                 .addComponent(sign_out_2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         logged_in_msg.setText("Logged In Successfully!");
@@ -311,19 +422,22 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             .addGroup(panel_3Layout.createSequentialGroup()
                 .addGap(241, 241, 241)
                 .addGroup(panel_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(logged_in_username, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logged_in_modify, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logged_in_msg)
                     .addComponent(logged_in_viewall, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sign_out_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(242, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logged_in_username, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
         panel_3Layout.setVerticalGroup(
             panel_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_3Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(49, 49, 49)
                 .addComponent(logged_in_username, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addComponent(logged_in_msg)
                 .addGap(18, 18, 18)
                 .addComponent(logged_in_modify)
@@ -465,15 +579,14 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                         .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panel_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_5Layout.createSequentialGroup()
-                                .addComponent(viewall_delete_success)
-                                .addGap(318, 318, 318))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_5Layout.createSequentialGroup()
-                                .addGroup(panel_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(viewall_delete_value)
-                                    .addComponent(viewall_deletebtn))
-                                .addGap(263, 263, 263))))))
+                        .addGroup(panel_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(viewall_delete_value)
+                            .addComponent(viewall_deletebtn))
+                        .addGap(263, 263, 263))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(viewall_delete_success, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(252, 252, 252))
         );
         panel_5Layout.setVerticalGroup(
             panel_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,8 +599,9 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addComponent(viewall_delete_value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(viewall_deletebtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(viewall_delete_success))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewall_delete_success, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
 
         javax.swing.GroupLayout wrapperLayout = new javax.swing.GroupLayout(wrapper);
@@ -520,6 +634,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panel_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(wrapperLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panel_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         wrapperLayout.setVerticalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,6 +667,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panel_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(wrapperLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panel_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -586,7 +710,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signup_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_btnMouseClicked
-
+        switchPanel(welcome_panel, panel_0);
     }//GEN-LAST:event_signup_btnMouseClicked
 
     private void login_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_btnMouseClicked
@@ -596,7 +720,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
 
     }//GEN-LAST:event_login_btnMouseClicked
-    
+
     private void login_usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusGained
         //clears username field on click
         error.setText("");
@@ -697,9 +821,10 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         // TODO add your handling code here:
         int toBeDeletedId = Integer.parseInt(viewall_delete_value.getText());
         try {
-            statement.executeUpdate("Delete from user where id=" + toBeDeletedId);
+            Statement statement2 = connectDB().createStatement();
+            statement2.executeUpdate("Delete from user where id=" + toBeDeletedId);
             viewall_delete_success.setText("Deleted!");
-            table.setModel(DbUtils.resultSetToTableModel(statement.executeQuery("select * from user")));
+            table.setModel(DbUtils.resultSetToTableModel(statement2.executeQuery("select * from user")));
         } catch (SQLException ex) {
             viewall_delete_success.setText("Something went wrong, try again");
 
@@ -758,6 +883,43 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         panels.pop().setVisible(true);
     }//GEN-LAST:event_sign_out_2MouseClicked
 
+    private void signup_btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_btn2MouseClicked
+        // TODO add your handling code here:
+        String query = "insert into user (userType, first_Name, last_Name,userName,password)" + " values (?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement que = connectDB().prepareStatement(query);
+            que.setInt(1, 2);
+
+            que.setString(2, fname_value.getText());
+
+            que.setString(3, lname_value.getText());
+
+            que.setString(4, uname_value.getText());
+
+            que.setString(5, pass_value.getText());
+            //get info and add ezz
+            que.executeUpdate();
+
+            signup_success.setText("Signed Up successfully, please login");
+            fname_value.setText("");
+            lname_value.setText("");
+            uname_value.setText("");
+            pass_value.setText("");
+        } catch (SQLException e) {
+            signup_success.setText("Oops, something went wrong, try again");
+        }
+    }//GEN-LAST:event_signup_btn2MouseClicked
+
+    private void login_btn_signupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_btn_signupMouseClicked
+        // TODO add your handling code here:
+        switchPanel(panel_0, panel_1);
+    }//GEN-LAST:event_login_btn_signupMouseClicked
+
+    private void signup_btn_lginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_btn_lginMouseClicked
+        // TODO add your handling code here:
+        switchPanel(panel_1, panel_0);
+    }//GEN-LAST:event_signup_btn_lginMouseClicked
+
     private void switchPanel(JPanel old, JPanel next) {
         old.setVisible(false);
 
@@ -811,13 +973,20 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     private javax.swing.JLabel back_btn_5;
     private javax.swing.JLabel current_time;
     private javax.swing.JLabel error;
+    private javax.swing.JTextField fname_value;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField lname_value;
     private javax.swing.JButton logged_in_modify;
     private javax.swing.JLabel logged_in_msg;
     private javax.swing.JLabel logged_in_username;
     private javax.swing.JButton logged_in_viewall;
     private javax.swing.JButton login_btn;
     private javax.swing.JButton login_btn2;
+    private javax.swing.JButton login_btn_signup;
     private javax.swing.JPasswordField login_password;
     private javax.swing.JLabel login_password_label;
     private javax.swing.JTextField login_username;
@@ -836,15 +1005,21 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     private javax.swing.JTextField modify_value_lastname;
     private javax.swing.JTextField modify_value_password;
     private javax.swing.JTextField modify_value_username;
+    private javax.swing.JPanel panel_0;
     private javax.swing.JPanel panel_1;
     private javax.swing.JPanel panel_2;
     private javax.swing.JPanel panel_3;
     private javax.swing.JPanel panel_4;
     private javax.swing.JPanel panel_5;
+    private javax.swing.JPasswordField pass_value;
     private javax.swing.JButton sign_out_2;
     private javax.swing.JButton sign_out_3;
     private javax.swing.JButton signup_btn;
+    private javax.swing.JButton signup_btn2;
+    private javax.swing.JButton signup_btn_lgin;
+    private javax.swing.JLabel signup_success;
     private javax.swing.JTable table;
+    private javax.swing.JTextField uname_value;
     private javax.swing.JLabel viewall_delete_success;
     private javax.swing.JTextField viewall_delete_value;
     private javax.swing.JButton viewall_deletebtn;
