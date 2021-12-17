@@ -5,21 +5,15 @@
  */
 package my.CCTProject;
 
-import java.awt.Component;
-import java.awt.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import static my.CCTProject.sqlConnection.connectDB;
 import net.proteanit.sql.DbUtils;
@@ -52,6 +46,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         panel_4.setVisible(false);
         modify_success.setVisible(false);
         panel_5.setVisible(false);
+        panel_6.setVisible(false);
 
     }
 
@@ -63,7 +58,6 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         welcome_txt = new javax.swing.JLabel();
         login_btn = new javax.swing.JButton();
         signup_btn = new javax.swing.JButton();
-        current_time = new javax.swing.JLabel();
         wrapper = new javax.swing.JPanel();
         panel_0 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -116,13 +110,26 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         viewall_deletebtn = new javax.swing.JButton();
         viewall_delete_value = new javax.swing.JTextField();
         viewall_delete_success = new javax.swing.JLabel();
+        panel_6 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        eq1_a = new javax.swing.JTextField();
+        eq1_b = new javax.swing.JTextField();
+        eq1_c = new javax.swing.JTextField();
+        eq2_a = new javax.swing.JTextField();
+        eq2_b = new javax.swing.JTextField();
+        eq2_c = new javax.swing.JTextField();
+        eq_solvebtn = new javax.swing.JButton();
+        eq_answer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         welcome_txt.setText("Welcome!");
 
@@ -144,35 +151,30 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             }
         });
 
-        current_time.setText("TIME HERE");
-        current_time.setToolTipText("");
-        current_time.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         javax.swing.GroupLayout welcome_panelLayout = new javax.swing.GroupLayout(welcome_panel);
         welcome_panel.setLayout(welcome_panelLayout);
         welcome_panelLayout.setHorizontalGroup(
             welcome_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcome_panelLayout.createSequentialGroup()
-                .addContainerGap(304, Short.MAX_VALUE)
+                .addContainerGap(285, Short.MAX_VALUE)
                 .addGroup(welcome_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(signup_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(login_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(welcome_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(current_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(261, 261, 261))
+                    .addComponent(login_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcome_panelLayout.createSequentialGroup()
+                        .addComponent(welcome_txt)
+                        .addGap(11, 11, 11)))
+                .addGap(280, 280, 280))
         );
         welcome_panelLayout.setVerticalGroup(
             welcome_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(welcome_panelLayout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(welcome_txt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(current_time)
+                .addGap(82, 82, 82)
+                .addComponent(welcome_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(login_btn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(signup_btn)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jLabel1.setText("First Name");
@@ -353,6 +355,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         });
 
         member_equation.setText("Solve!");
+        member_equation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                member_equationMouseClicked(evt);
+            }
+        });
 
         sign_out_2.setText("Sign out");
         sign_out_2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -604,6 +611,120 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addGap(5, 5, 5))
         );
 
+        jLabel5.setText("Equation must be entered in the form -- ax+by = c  --");
+
+        jLabel6.setText("Equation 1");
+
+        jLabel7.setText("a");
+
+        jLabel8.setText("b");
+
+        jLabel9.setText("c");
+
+        jLabel10.setText("Equation 2");
+
+        jLabel11.setText("a");
+
+        jLabel12.setText("b");
+
+        jLabel13.setText("c");
+
+        eq_solvebtn.setText("Solve!");
+        eq_solvebtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eq_solvebtnMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_6Layout = new javax.swing.GroupLayout(panel_6);
+        panel_6.setLayout(panel_6Layout);
+        panel_6Layout.setHorizontalGroup(
+            panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_6Layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_6Layout.createSequentialGroup()
+                .addContainerGap(205, Short.MAX_VALUE)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_6Layout.createSequentialGroup()
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel6)
+                            .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(panel_6Layout.createSequentialGroup()
+                                    .addComponent(jLabel13)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(eq2_c))
+                                .addGroup(panel_6Layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(eq2_b))
+                                .addGroup(panel_6Layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(eq2_a))
+                                .addGroup(panel_6Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(eq1_c))
+                                .addGroup(panel_6Layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(eq1_b))
+                                .addGroup(panel_6Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(eq1_a, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(374, 374, 374))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_6Layout.createSequentialGroup()
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_6Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(eq_answer))
+                            .addComponent(eq_solvebtn))
+                        .addGap(275, 275, 275))))
+        );
+        panel_6Layout.setVerticalGroup(
+            panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_6Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(eq1_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(eq1_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(eq1_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(eq2_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(eq2_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(eq2_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(eq_solvebtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(eq_answer)
+                .addGap(32, 32, 32))
+        );
+
         javax.swing.GroupLayout wrapperLayout = new javax.swing.GroupLayout(wrapper);
         wrapper.setLayout(wrapperLayout);
         wrapperLayout.setHorizontalGroup(
@@ -639,6 +760,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panel_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(wrapperLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panel_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         wrapperLayout.setVerticalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,6 +798,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panel_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(wrapperLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panel_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -751,7 +882,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 rs = statement.executeQuery(sql);
                 if (rs.next()) {
                     userType = rs.getInt(2);
-                    System.out.println(userType);
+                    
                     login_password.setText("");
                     //admin
                     if (userType == 1) {
@@ -831,11 +962,6 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         }
 
     }//GEN-LAST:event_viewall_deletebtnMouseClicked
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-        current_time.setText(java.time.LocalTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME));
-    }//GEN-LAST:event_formWindowActivated
 
     private void viewall_delete_valueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewall_delete_valueFocusGained
         // TODO add your handling code here:
@@ -920,6 +1046,61 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         switchPanel(panel_1, panel_0);
     }//GEN-LAST:event_signup_btn_lginMouseClicked
 
+    private void eq_solvebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eq_solvebtnMouseClicked
+        // TODO add your handling code here:
+        double[][] lhs = {{Double.parseDouble(eq1_a.getText()), Double.parseDouble(eq1_b.getText())}, {Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText())}};
+        double[] rhs = {Double.parseDouble(eq1_c.getText()),Double.parseDouble(eq2_c.getText())};
+        
+        double firstof2 = Double.parseDouble(eq2_a.getText());
+        double firstof1 = Double.parseDouble(eq1_a.getText());
+        double secondof2 = Double.parseDouble(eq2_b.getText());
+        double equals = rhs[0];
+        for(int i=0;i<2;i++){
+            for(int j=0;j<2;j++){
+                if(i==0){
+                    lhs[i][j] = lhs[i][j]*firstof2;
+                    if(j==0){rhs[0] = rhs[0]*firstof2;}
+                    
+                }else{
+                    lhs[i][j] = lhs[i][j]*firstof1; 
+                    if(j==0){rhs[1] = rhs[1]*firstof1;}
+                }
+               
+            }
+        }
+       
+        if(lhs[0][0]>0 && lhs[1][0]>0){
+            int i=0;
+            for(int j=0;j<2;j++){
+                lhs[i][j] = lhs[i][j]*-1;
+                if(j==0){
+                    rhs[i] = rhs[i]*-1;
+                }
+                
+            }
+        }
+        
+        double sumLHS = lhs[0][1]+lhs[1][1];
+        double sumRHS = rhs[0]+rhs[1];
+        
+        double y = sumRHS/sumLHS;
+        System.out.println(y);
+        secondof2 = secondof2*y;
+        if(y>0){
+            equals = equals - secondof2;
+        }else if(y<0){
+            equals = equals + secondof2;
+        }
+        double x = equals/firstof2;
+        
+        eq_answer.setText(x+","+y);
+    }//GEN-LAST:event_eq_solvebtnMouseClicked
+
+    private void member_equationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_member_equationMouseClicked
+        // TODO add your handling code here:
+        switchPanel(panel_2,panel_6);
+    }//GEN-LAST:event_member_equationMouseClicked
+
     private void switchPanel(JPanel old, JPanel next) {
         old.setVisible(false);
 
@@ -971,13 +1152,29 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel back_btn_4;
     private javax.swing.JLabel back_btn_5;
-    private javax.swing.JLabel current_time;
+    private javax.swing.JTextField eq1_a;
+    private javax.swing.JTextField eq1_b;
+    private javax.swing.JTextField eq1_c;
+    private javax.swing.JTextField eq2_a;
+    private javax.swing.JTextField eq2_b;
+    private javax.swing.JTextField eq2_c;
+    private javax.swing.JLabel eq_answer;
+    private javax.swing.JButton eq_solvebtn;
     private javax.swing.JLabel error;
     private javax.swing.JTextField fname_value;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lname_value;
     private javax.swing.JButton logged_in_modify;
@@ -1011,6 +1208,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     private javax.swing.JPanel panel_3;
     private javax.swing.JPanel panel_4;
     private javax.swing.JPanel panel_5;
+    private javax.swing.JPanel panel_6;
     private javax.swing.JPasswordField pass_value;
     private javax.swing.JButton sign_out_2;
     private javax.swing.JButton sign_out_3;
