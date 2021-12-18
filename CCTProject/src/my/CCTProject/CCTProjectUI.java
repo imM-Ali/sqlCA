@@ -27,7 +27,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     Statement statement = connectDB().createStatement(
             ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE);
-    int userType,userId;
+    int userType, userId;
     ResultSet rs;
     //stack to store all the windows turn by turn
     Stack<JPanel> panels = new Stack<JPanel>();
@@ -1042,7 +1042,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
     private void login_btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_btn2MouseClicked
         // TODO add your handling code here:
-
+//Gets the username and password from UI and checks usertype in DB and presents the next UI accordingly
         String username = login_username.getText();
         String password = login_password.getText();
         if (!username.isEmpty() && !password.isEmpty()) {
@@ -1075,7 +1075,8 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }//GEN-LAST:event_login_btn2MouseClicked
 
     private void logged_in_modifyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logged_in_modifyMouseClicked
-        // TODO add your handling code here:        
+           
+        //all the text fields are filled by placeholders matching the present values in Db
         try {
             // TODO add your handling code here:
             modify_value_username.setText(rs.getString(5));
@@ -1093,7 +1094,6 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
     private void modify_savebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modify_savebtnMouseClicked
         try {
-            // TODO add your handling code here:
             rs.updateString(3, modify_value_firstname.getText());
             rs.updateString(4, modify_value_lastname.getText());
             rs.updateString(5, modify_value_username.getText());
@@ -1108,7 +1108,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
     private void logged_in_viewallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logged_in_viewallMouseClicked
         try {
-            // TODO add your handling code here:
+            // Gets the data from DB and presents in a table
             Statement statement2 = connectDB().createStatement();
             table.setModel(DbUtils.resultSetToTableModel(statement2.executeQuery("select * from user")));
             switchPanel(panel_3, panel_5);
@@ -1118,7 +1118,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }//GEN-LAST:event_logged_in_viewallMouseClicked
 
     private void viewall_deletebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewall_deletebtnMouseClicked
-        // TODO add your handling code here:
+        // Deletes data and refreshes the page:
         int toBeDeletedId = Integer.parseInt(viewall_delete_value.getText());
         try {
             Statement statement2 = connectDB().createStatement();
@@ -1138,20 +1138,20 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }//GEN-LAST:event_viewall_delete_valueFocusGained
 
     private void back_btn_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back_btn_4MouseClicked
-        // TODO add your handling code here:
+        // current panel set to invisible and the popped panel from stack set to visible
         panel_4.setVisible(false);
         panels.pop().setVisible(true);
         modify_success.setText("");
     }//GEN-LAST:event_back_btn_4MouseClicked
 
     private void back_btn_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back_btn_5MouseClicked
-        // TODO add your handling code here:
+        
         panel_5.setVisible(false);
         panels.pop().setVisible(true);
     }//GEN-LAST:event_back_btn_5MouseClicked
 
     private void member_modifyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_member_modifyMouseClicked
-        // TODO add your handling code here:
+        
         try {
             // TODO add your handling code here:
             modify_value_username.setText(rs.getString(5));
@@ -1216,7 +1216,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }//GEN-LAST:event_signup_btn_lginMouseClicked
 
     private void eq_solvebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eq_solvebtnMouseClicked
-        // TODO add your handling code here:
+        
         //if 3x3 eq
         //ax+by+cz=d
         if (btn_33.isSelected()) {
@@ -1226,10 +1226,13 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             double[][] pair1 = {{Double.parseDouble(eq1_a.getText()), Double.parseDouble(eq1_b.getText()), Double.parseDouble(eq1_c.getText())}, {Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText()), Double.parseDouble(eq2_c.getText())}};
             double[] result1 = {Double.parseDouble(eq1_d.getText()), Double.parseDouble(eq2_d.getText())};
 
+            //keeping the original values in seperate variables because we will need them when substituting found values
             double firstof2 = Double.parseDouble(eq2_a.getText());
             double firstof1 = Double.parseDouble(eq1_a.getText());
             double secondof2 = Double.parseDouble(eq2_b.getText());
             double equals = result1[0];
+            
+            //runs through equation variables and tries to make the co-efficients of X equal in both equations 
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 3; j++) {
                     if (i == 0) {
@@ -1247,7 +1250,8 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
                 }
             }
-
+            
+            //if co-efficients of X are equal but have same sign, this reverses the sign on 1 equation so they can be minus'd
             if (pair1[0][0] == pair1[1][0]) {
                 for (int j = 0; j < 3; j++) {
                     pair1[1][j] = pair1[1][j] * -1;
@@ -1260,6 +1264,8 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             double c1 = (pair1[0][2] + pair1[1][2]);
             double d1 = result1[0] + result1[1];
 
+            
+            
             //*****************************PAIR 2**************************//
             double[][] pair2 = {{Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText()), Double.parseDouble(eq2_c.getText())}, {Double.parseDouble(eq3_a.getText()), Double.parseDouble(eq3_b.getText()), Double.parseDouble(eq3_c.getText())}};
             double[] result2 = {Double.parseDouble(eq2_d.getText()), Double.parseDouble(eq3_d.getText())};
@@ -1298,7 +1304,8 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             double c2 = (pair2[0][2] + pair2[1][2]);
             double d2 = result2[0] + result2[1];
 
-            //****************************Final 2************************//   
+            
+            //******Now we will solve pair 1 result and pair 2 result equation just as a 2x2 linear equation********//   
             double[][] lhs = {{b1, c1}, {b2, c2}};
             double[] rhs = {d1, d2};
 
@@ -1337,8 +1344,9 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
             double sumLHS = lhs[0][1] + lhs[1][1];
             double sumRHS = rhs[0] + rhs[1];
-
+            //value of z
             double z = sumRHS / sumLHS;
+            //putting z value into any of resulting equations found from pair1 or pair2
             secondof2 = secondof2 * z;
             if (secondof2 > 0) {
                 equals = equals - secondof2;
@@ -1366,35 +1374,26 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             double x = equals / Double.parseDouble(eq1_a.getText());
             eq_answer.setText("x=" + x + ", y=" + yfinal + ",z =" + z);
             
+            //when we have solved our equation, it will be saved in the DB against the current logged in users' ID
             String query = "insert into equationhistory (userId, equation1, equation2, equation3)" + " values (?, ?,?,?)";
-        try {
-            PreparedStatement que = connectDB().prepareStatement(query);
-            que.setInt(2, userId);
+            try {
+                PreparedStatement que = connectDB().prepareStatement(query);
+                que.setInt(2, userId);
 
-            que.setString(3, eq1_a.getText()+"x"+eq1_b.getText()+"y"+eq1_c.getText()+"z="+eq1_d.getText());
-            que.setString(4, eq2_a.getText()+"x"+eq2_b.getText()+"y"+eq2_c.getText()+"z="+eq2_d.getText());
-            que.setString(5, eq3_a.getText()+"x"+eq3_b.getText()+"y"+eq3_c.getText()+"z="+eq3_d.getText());
+                que.setString(3, eq1_a.getText() + "x" + eq1_b.getText() + "y" + eq1_c.getText() + "z=" + eq1_d.getText());
+                que.setString(4, eq2_a.getText() + "x" + eq2_b.getText() + "y" + eq2_c.getText() + "z=" + eq2_d.getText());
+                que.setString(5, eq3_a.getText() + "x" + eq3_b.getText() + "y" + eq3_c.getText() + "z=" + eq3_d.getText());
 
-            //get info and add ezz
-            que.executeUpdate();
+                //get info and add ezz
+                que.executeUpdate();
 
-        } catch (SQLException e) {
-            signup_success.setText("Oops, something went wrong, try again");
-        }
-            
-            
+            } catch (SQLException e) {
+                signup_success.setText("Oops, something went wrong, try again");
+            }
+
         } 
 
-
-
-
-
-
-
-
-
-
-        //if 2x2
+//if 2x2
         else {
             double[][] lhs = {{Double.parseDouble(eq1_a.getText()), Double.parseDouble(eq1_b.getText())}, {Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText())}};
             double[] rhs = {Double.parseDouble(eq1_c.getText()), Double.parseDouble(eq2_c.getText())};
@@ -1446,36 +1445,24 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             double x = equals / firstof2;
 
             eq_answer.setText(x + "," + y);
-            
-            try{
-            String query = "insert into equationhistory (userId, equation1, equation2, equation3)" + " values (?, ?,?,?)";
-            PreparedStatement que = connectDB().prepareStatement(query);
-            que.setInt(1, userId);
 
-            que.setString(2, eq1_a.getText()+"x"+eq1_b.getText()+"y="+eq1_c.getText()+"c");
-            que.setString(3, eq2_a.getText()+"x"+eq2_b.getText()+"y="+eq2_c.getText()+"c");
-            
+            try {
+                String query = "insert into equationhistory (userId, equation1, equation2, equation3)" + " values (?, ?,?,?)";
+                PreparedStatement que = connectDB().prepareStatement(query);
+                que.setInt(1, userId);
 
-            //get info and add ezz
-            que.executeUpdate();
+                que.setString(2, eq1_a.getText() + "x" + eq1_b.getText() + "y=" + eq1_c.getText() + "c");
+                que.setString(3, eq2_a.getText() + "x" + eq2_b.getText() + "y=" + eq2_c.getText() + "c");
 
-        
-            
-            
-        }
-            catch(Exception e){
-                
+                //get info and add ezz
+                que.executeUpdate();
+
+            } catch (Exception e) {
+
             }
-            
-            
-            
+
         }
-        
-        
-        
-        
-        
-        
+
 
     }//GEN-LAST:event_eq_solvebtnMouseClicked
 
@@ -1494,7 +1481,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     }//GEN-LAST:event_eq3_aMouseClicked
 
     private void panel_6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_6MouseEntered
-        // TODO add your handling code here:
+        // disables the 'D' field and 3rd equation for input if 3x3 not selected on Ui:
 
         if (btn_33.isSelected()) {
             eq3_a.setEditable(true);
@@ -1519,7 +1506,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
     private void logged_in_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logged_in_historyMouseClicked
         // TODO add your handling code here:        
-         try {
+        try {
             // TODO add your handling code here:
             Statement statement2 = connectDB().createStatement();
             jTable1.setModel(DbUtils.resultSetToTableModel(statement2.executeQuery("select * from equationhistory")));
@@ -1527,9 +1514,8 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         } catch (SQLException ex) {
             Logger.getLogger(CCTProjectUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_logged_in_historyMouseClicked
 
     private void switchPanel(JPanel old, JPanel next) {
