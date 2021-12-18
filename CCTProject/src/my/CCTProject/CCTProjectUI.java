@@ -5,7 +5,6 @@
  */
 package my.CCTProject;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +27,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     Statement statement = connectDB().createStatement(
             ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE);
-    int userType;
+    int userType,userId;
     ResultSet rs;
     //stack to store all the windows turn by turn
     Stack<JPanel> panels = new Stack<JPanel>();
@@ -47,6 +46,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         modify_success.setVisible(false);
         panel_5.setVisible(false);
         panel_6.setVisible(false);
+        panel_7.setVisible(false);
 
     }
 
@@ -91,6 +91,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         logged_in_modify = new javax.swing.JButton();
         logged_in_viewall = new javax.swing.JButton();
         sign_out_3 = new javax.swing.JButton();
+        logged_in_history = new javax.swing.JButton();
         panel_4 = new javax.swing.JPanel();
         modify_value_username = new javax.swing.JTextField();
         modify_value_password = new javax.swing.JTextField();
@@ -128,6 +129,23 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         eq2_c = new javax.swing.JTextField();
         eq_solvebtn = new javax.swing.JButton();
         eq_answer = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        eq3_a = new javax.swing.JTextField();
+        eq3_b = new javax.swing.JTextField();
+        eq3_c = new javax.swing.JTextField();
+        btn_33 = new javax.swing.JRadioButton();
+        jLabel18 = new javax.swing.JLabel();
+        eq3_d = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        eq2_d = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        eq1_d = new javax.swing.JTextField();
+        panel_7 = new javax.swing.JPanel();
+        historytbl = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -422,22 +440,30 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             }
         });
 
+        logged_in_history.setText("View user history");
+        logged_in_history.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logged_in_historyMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_3Layout = new javax.swing.GroupLayout(panel_3);
         panel_3.setLayout(panel_3Layout);
         panel_3Layout.setHorizontalGroup(
             panel_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_3Layout.createSequentialGroup()
+                .addContainerGap(170, Short.MAX_VALUE)
+                .addComponent(logged_in_username, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
             .addGroup(panel_3Layout.createSequentialGroup()
                 .addGap(241, 241, 241)
                 .addGroup(panel_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(logged_in_modify, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logged_in_msg)
+                    .addComponent(logged_in_msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logged_in_viewall, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sign_out_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(242, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logged_in_username, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                    .addComponent(sign_out_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logged_in_history, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_3Layout.setVerticalGroup(
             panel_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,7 +476,9 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addComponent(logged_in_modify)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logged_in_viewall)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logged_in_history)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(sign_out_3)
                 .addGap(47, 47, 47))
         );
@@ -611,6 +639,12 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addGap(5, 5, 5))
         );
 
+        panel_6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_6MouseEntered(evt);
+            }
+        });
+
         jLabel5.setText("Equation must be entered in the form -- ax+by = c  --");
 
         jLabel6.setText("Equation 1");
@@ -636,100 +670,225 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
             }
         });
 
+        jLabel14.setText("Equation 3");
+
+        jLabel15.setText("a");
+
+        jLabel16.setText("b");
+
+        jLabel17.setText("c");
+
+        eq3_a.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eq3_aMouseClicked(evt);
+            }
+        });
+
+        eq3_c.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eq3_cActionPerformed(evt);
+            }
+        });
+
+        btn_33.setText("3 Variables?");
+        btn_33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_33ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("d");
+
+        jLabel19.setText("d");
+
+        jLabel20.setText("d");
+
         javax.swing.GroupLayout panel_6Layout = new javax.swing.GroupLayout(panel_6);
         panel_6.setLayout(panel_6Layout);
         panel_6Layout.setHorizontalGroup(
             panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_6Layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_6Layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_6Layout.createSequentialGroup()
-                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel6)
-                            .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panel_6Layout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(eq2_c))
-                                .addGroup(panel_6Layout.createSequentialGroup()
-                                    .addComponent(jLabel12)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(eq2_b))
-                                .addGroup(panel_6Layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(eq2_a))
-                                .addGroup(panel_6Layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(eq1_c))
-                                .addGroup(panel_6Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(eq1_b))
-                                .addGroup(panel_6Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(eq1_a, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(374, 374, 374))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_6Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_6Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(eq_answer))
                             .addComponent(eq_solvebtn))
-                        .addGap(275, 275, 275))))
+                        .addGap(275, 275, 275))
+                    .addGroup(panel_6Layout.createSequentialGroup()
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_6Layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(jLabel6))
+                            .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_6Layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(eq1_a, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                        .addComponent(eq1_b)))
+                                .addGroup(panel_6Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(eq1_d, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(eq1_c, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_6Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel10)
+                                .addGap(113, 113, 113)
+                                .addComponent(jLabel14)
+                                .addGap(83, 83, 83))
+                            .addGroup(panel_6Layout.createSequentialGroup()
+                                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(eq2_d, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(eq2_a, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(eq2_b, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(eq2_c, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panel_6Layout.createSequentialGroup()
+                                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel16)
+                                                .addComponent(jLabel15))
+                                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(eq3_a)
+                                            .addComponent(eq3_b)
+                                            .addComponent(eq3_c, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(panel_6Layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jLabel18)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(eq3_d, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(33, 33, 33))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_33)
+                .addGap(306, 306, 306))
+            .addGroup(panel_6Layout.createSequentialGroup()
+                .addGap(207, 207, 207)
+                .addComponent(jLabel5)
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         panel_6Layout.setVerticalGroup(
             panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_6Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel5)
+                .addGap(28, 28, 28)
+                .addComponent(btn_33)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(eq1_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel14))
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_6Layout.createSequentialGroup()
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(eq2_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(eq1_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_6Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel12))
+                            .addGroup(panel_6Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(eq2_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8)
+                                    .addComponent(eq1_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(34, 34, 34)
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(eq2_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eq1_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel17)
+                            .addComponent(eq3_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panel_6Layout.createSequentialGroup()
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(eq3_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(eq3_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(36, 36, 36)
                 .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(eq1_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(eq1_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(eq2_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(eq2_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(eq2_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(jLabel19)
+                    .addComponent(eq2_d, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eq1_d, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel18)
+                    .addComponent(eq3_d, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(eq_solvebtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(eq_answer)
                 .addGap(32, 32, 32))
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        historytbl.setViewportView(jTable1);
+
+        javax.swing.GroupLayout panel_7Layout = new javax.swing.GroupLayout(panel_7);
+        panel_7.setLayout(panel_7Layout);
+        panel_7Layout.setHorizontalGroup(
+            panel_7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 668, Short.MAX_VALUE)
+            .addGroup(panel_7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(historytbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        panel_7Layout.setVerticalGroup(
+            panel_7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 508, Short.MAX_VALUE)
+            .addGroup(panel_7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(historytbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout wrapperLayout = new javax.swing.GroupLayout(wrapper);
         wrapper.setLayout(wrapperLayout);
         wrapperLayout.setHorizontalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGap(0, 668, Short.MAX_VALUE)
             .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addContainerGap()
@@ -765,10 +924,15 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panel_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(wrapperLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panel_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         wrapperLayout.setVerticalGroup(
             wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
             .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(wrapperLayout.createSequentialGroup()
                     .addGap(60, 60, 60)
@@ -804,6 +968,11 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panel_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(wrapperLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panel_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -824,7 +993,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -834,7 +1003,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(32, 32, 32)
                     .addComponent(welcome_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(82, Short.MAX_VALUE)))
+                    .addContainerGap(134, Short.MAX_VALUE)))
         );
 
         pack();
@@ -882,7 +1051,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
                 rs = statement.executeQuery(sql);
                 if (rs.next()) {
                     userType = rs.getInt(2);
-                    
+                    userId = rs.getInt(1);
                     login_password.setText("");
                     //admin
                     if (userType == 1) {
@@ -1048,58 +1217,320 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
 
     private void eq_solvebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eq_solvebtnMouseClicked
         // TODO add your handling code here:
-        double[][] lhs = {{Double.parseDouble(eq1_a.getText()), Double.parseDouble(eq1_b.getText())}, {Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText())}};
-        double[] rhs = {Double.parseDouble(eq1_c.getText()),Double.parseDouble(eq2_c.getText())};
-        
-        double firstof2 = Double.parseDouble(eq2_a.getText());
-        double firstof1 = Double.parseDouble(eq1_a.getText());
-        double secondof2 = Double.parseDouble(eq2_b.getText());
-        double equals = rhs[0];
-        for(int i=0;i<2;i++){
-            for(int j=0;j<2;j++){
-                if(i==0){
-                    lhs[i][j] = lhs[i][j]*firstof2;
-                    if(j==0){rhs[0] = rhs[0]*firstof2;}
-                    
-                }else{
-                    lhs[i][j] = lhs[i][j]*firstof1; 
-                    if(j==0){rhs[1] = rhs[1]*firstof1;}
+        //if 3x3 eq
+        //ax+by+cz=d
+        if (btn_33.isSelected()) {
+
+            //will use pairs, so     eq1,eq2  &&& eq2,eq3
+            //************************PAIR 1*********************************//
+            double[][] pair1 = {{Double.parseDouble(eq1_a.getText()), Double.parseDouble(eq1_b.getText()), Double.parseDouble(eq1_c.getText())}, {Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText()), Double.parseDouble(eq2_c.getText())}};
+            double[] result1 = {Double.parseDouble(eq1_d.getText()), Double.parseDouble(eq2_d.getText())};
+
+            double firstof2 = Double.parseDouble(eq2_a.getText());
+            double firstof1 = Double.parseDouble(eq1_a.getText());
+            double secondof2 = Double.parseDouble(eq2_b.getText());
+            double equals = result1[0];
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (i == 0) {
+                        pair1[i][j] = pair1[i][j] * firstof2;
+                        if (j == 0) {
+                            result1[0] = result1[0] * firstof2;
+                        }
+
+                    } else {
+                        pair1[i][j] = pair1[i][j] * firstof1;
+                        if (j == 0) {
+                            result1[1] = result1[1] * firstof1;
+                        }
+                    }
+
                 }
-               
             }
-        }
-       
-        if(lhs[0][0]>0 && lhs[1][0]>0){
-            int i=0;
-            for(int j=0;j<2;j++){
-                lhs[i][j] = lhs[i][j]*-1;
-                if(j==0){
-                    rhs[i] = rhs[i]*-1;
+
+            if (pair1[0][0] == pair1[1][0]) {
+                for (int j = 0; j < 3; j++) {
+                    pair1[1][j] = pair1[1][j] * -1;
+                    if (j == 0) {
+                        result1[1] = result1[1] * -1;
+                    }
                 }
+            }
+            double b1 = (pair1[0][1] + pair1[1][1]);
+            double c1 = (pair1[0][2] + pair1[1][2]);
+            double d1 = result1[0] + result1[1];
+
+            //*****************************PAIR 2**************************//
+            double[][] pair2 = {{Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText()), Double.parseDouble(eq2_c.getText())}, {Double.parseDouble(eq3_a.getText()), Double.parseDouble(eq3_b.getText()), Double.parseDouble(eq3_c.getText())}};
+            double[] result2 = {Double.parseDouble(eq2_d.getText()), Double.parseDouble(eq3_d.getText())};
+
+            firstof2 = Double.parseDouble(eq3_a.getText());
+            firstof1 = Double.parseDouble(eq2_a.getText());
+            secondof2 = Double.parseDouble(eq3_b.getText());
+            equals = result2[0];
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (i == 0) {
+                        pair2[i][j] = pair2[i][j] * firstof2;
+                        if (j == 0) {
+                            result2[0] = result2[0] * firstof2;
+                        }
+
+                    } else {
+                        pair2[i][j] = pair2[i][j] * firstof1;
+                        if (j == 0) {
+                            result2[1] = result2[1] * firstof1;
+                        }
+                    }
+
+                }
+            }
+
+            if (pair2[0][0] == pair2[1][0]) {
+                for (int j = 0; j < 3; j++) {
+                    pair2[1][j] = pair2[1][j] * -1;
+                    if (j == 0) {
+                        result2[1] = result2[1] * -1;
+                    }
+                }
+            }
+            double b2 = (pair2[0][1] + pair2[1][1]);
+            double c2 = (pair2[0][2] + pair2[1][2]);
+            double d2 = result2[0] + result2[1];
+
+            //****************************Final 2************************//   
+            double[][] lhs = {{b1, c1}, {b2, c2}};
+            double[] rhs = {d1, d2};
+
+            firstof2 = b2 * -1;
+            firstof1 = b1;
+            equals = d2 * -1;
+            secondof2 = c2 * -1;
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 2; j++) {
+                    if (i == 0) {
+                        lhs[i][j] = lhs[i][j] * firstof2;
+                        if (j == 0) {
+                            rhs[0] = rhs[0] * firstof2;
+                        }
+
+                    } else {
+                        lhs[i][j] = lhs[i][j] * firstof1;
+                        if (j == 0) {
+                            rhs[1] = rhs[1] * firstof1;
+                        }
+                    }
+
+                }
+            }
+
+            if (lhs[0][0] > 0 && lhs[1][0] > 0) {
+                int i = 0;
+                for (int j = 0; j < 2; j++) {
+                    lhs[i][j] = lhs[i][j] * -1;
+                    if (j == 0) {
+                        rhs[i] = rhs[i] * -1;
+                    }
+
+                }
+            }
+
+            double sumLHS = lhs[0][1] + lhs[1][1];
+            double sumRHS = rhs[0] + rhs[1];
+
+            double z = sumRHS / sumLHS;
+            secondof2 = secondof2 * z;
+            if (secondof2 > 0) {
+                equals = equals - secondof2;
+            } else if (secondof2 < 0) {
+                equals = equals + secondof2;
+            }
+
+            double yfinal = equals / firstof2;
+            double y = yfinal;
+            eq_answer.setText("y=" + y + ", z =" + z);
+
+            //now that we have y and z, we can put in any original equation to get X
+            //  eq1_a*x + eq1_b*y +eq1_c*z = eq1_d;
+            y = Double.parseDouble(eq1_b.getText()) * y;
+
+            z = Double.parseDouble(eq1_c.getText()) * z;
+
+            y = y + z;
+
+            if (y < 0) {
+                equals = Double.parseDouble(eq1_d.getText()) - y;
+            } else if (y > 0) {
+                equals = Double.parseDouble(eq1_d.getText()) + y;
+            }
+            double x = equals / Double.parseDouble(eq1_a.getText());
+            eq_answer.setText("x=" + x + ", y=" + yfinal + ",z =" + z);
+            
+            String query = "insert into equationhistory (userId, equation1, equation2, equation3)" + " values (?, ?,?,?)";
+        try {
+            PreparedStatement que = connectDB().prepareStatement(query);
+            que.setInt(2, userId);
+
+            que.setString(3, eq1_a.getText()+"x"+eq1_b.getText()+"y"+eq1_c.getText()+"z="+eq1_d.getText());
+            que.setString(4, eq2_a.getText()+"x"+eq2_b.getText()+"y"+eq2_c.getText()+"z="+eq2_d.getText());
+            que.setString(5, eq3_a.getText()+"x"+eq3_b.getText()+"y"+eq3_c.getText()+"z="+eq3_d.getText());
+
+            //get info and add ezz
+            que.executeUpdate();
+
+        } catch (SQLException e) {
+            signup_success.setText("Oops, something went wrong, try again");
+        }
+            
+            
+        } 
+
+
+
+
+
+
+
+
+
+
+        //if 2x2
+        else {
+            double[][] lhs = {{Double.parseDouble(eq1_a.getText()), Double.parseDouble(eq1_b.getText())}, {Double.parseDouble(eq2_a.getText()), Double.parseDouble(eq2_b.getText())}};
+            double[] rhs = {Double.parseDouble(eq1_c.getText()), Double.parseDouble(eq2_c.getText())};
+
+            double firstof2 = Double.parseDouble(eq2_a.getText());
+            double firstof1 = Double.parseDouble(eq1_a.getText());
+            double secondof2 = Double.parseDouble(eq2_b.getText());
+            double equals = rhs[0];
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 2; j++) {
+                    if (i == 0) {
+                        lhs[i][j] = lhs[i][j] * firstof2;
+                        if (j == 0) {
+                            rhs[0] = rhs[0] * firstof2;
+                        }
+
+                    } else {
+                        lhs[i][j] = lhs[i][j] * firstof1;
+                        if (j == 0) {
+                            rhs[1] = rhs[1] * firstof1;
+                        }
+                    }
+
+                }
+            }
+
+            if (lhs[0][0] > 0 && lhs[1][0] > 0) {
+                int i = 0;
+                for (int j = 0; j < 2; j++) {
+                    lhs[i][j] = lhs[i][j] * -1;
+                    if (j == 0) {
+                        rhs[i] = rhs[i] * -1;
+                    }
+
+                }
+            }
+
+            double sumLHS = lhs[0][1] + lhs[1][1];
+            double sumRHS = rhs[0] + rhs[1];
+
+            double y = sumRHS / sumLHS;
+
+            secondof2 = secondof2 * y;
+            if (y > 0) {
+                equals = equals - secondof2;
+            } else if (y < 0) {
+                equals = equals + secondof2;
+            }
+            double x = equals / firstof2;
+
+            eq_answer.setText(x + "," + y);
+            
+            try{
+            String query = "insert into equationhistory (userId, equation1, equation2, equation3)" + " values (?, ?,?,?)";
+            PreparedStatement que = connectDB().prepareStatement(query);
+            que.setInt(1, userId);
+
+            que.setString(2, eq1_a.getText()+"x"+eq1_b.getText()+"y="+eq1_c.getText()+"c");
+            que.setString(3, eq2_a.getText()+"x"+eq2_b.getText()+"y="+eq2_c.getText()+"c");
+            
+
+            //get info and add ezz
+            que.executeUpdate();
+
+        
+            
+            
+        }
+            catch(Exception e){
                 
             }
+            
+            
+            
         }
         
-        double sumLHS = lhs[0][1]+lhs[1][1];
-        double sumRHS = rhs[0]+rhs[1];
         
-        double y = sumRHS/sumLHS;
-        System.out.println(y);
-        secondof2 = secondof2*y;
-        if(y>0){
-            equals = equals - secondof2;
-        }else if(y<0){
-            equals = equals + secondof2;
-        }
-        double x = equals/firstof2;
         
-        eq_answer.setText(x+","+y);
+        
+        
+        
+
     }//GEN-LAST:event_eq_solvebtnMouseClicked
 
     private void member_equationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_member_equationMouseClicked
         // TODO add your handling code here:
-        switchPanel(panel_2,panel_6);
+        switchPanel(panel_2, panel_6);
     }//GEN-LAST:event_member_equationMouseClicked
+
+    private void eq3_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eq3_cActionPerformed
+        // TODO add your handling code here:
+        eq3_a.setEnabled(false);
+    }//GEN-LAST:event_eq3_cActionPerformed
+
+    private void eq3_aMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eq3_aMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eq3_aMouseClicked
+
+    private void panel_6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_6MouseEntered
+        // TODO add your handling code here:
+
+        if (btn_33.isSelected()) {
+            eq3_a.setEditable(true);
+            eq3_b.setEditable(true);
+            eq3_c.setEditable(true);
+            eq3_d.setEditable(true);
+            eq1_d.setEditable(true);
+            eq2_d.setEditable(true);
+        } else {
+            eq3_a.setEditable(false);
+            eq3_b.setEditable(false);
+            eq3_c.setEditable(false);
+            eq3_d.setEditable(false);
+            eq1_d.setEditable(false);
+            eq2_d.setEditable(false);
+        }
+    }//GEN-LAST:event_panel_6MouseEntered
+
+    private void btn_33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_33ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_33ActionPerformed
+
+    private void logged_in_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logged_in_historyMouseClicked
+        // TODO add your handling code here:        
+         try {
+            // TODO add your handling code here:
+            Statement statement2 = connectDB().createStatement();
+            jTable1.setModel(DbUtils.resultSetToTableModel(statement2.executeQuery("select * from equationhistory")));
+            switchPanel(panel_3, panel_7);
+        } catch (SQLException ex) {
+            Logger.getLogger(CCTProjectUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_logged_in_historyMouseClicked
 
     private void switchPanel(JPanel old, JPanel next) {
         old.setVisible(false);
@@ -1152,22 +1583,37 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel back_btn_4;
     private javax.swing.JLabel back_btn_5;
+    private javax.swing.JRadioButton btn_33;
     private javax.swing.JTextField eq1_a;
     private javax.swing.JTextField eq1_b;
     private javax.swing.JTextField eq1_c;
+    private javax.swing.JTextField eq1_d;
     private javax.swing.JTextField eq2_a;
     private javax.swing.JTextField eq2_b;
     private javax.swing.JTextField eq2_c;
+    private javax.swing.JTextField eq2_d;
+    private javax.swing.JTextField eq3_a;
+    private javax.swing.JTextField eq3_b;
+    private javax.swing.JTextField eq3_c;
+    private javax.swing.JTextField eq3_d;
     private javax.swing.JLabel eq_answer;
     private javax.swing.JButton eq_solvebtn;
     private javax.swing.JLabel error;
     private javax.swing.JTextField fname_value;
+    private javax.swing.JScrollPane historytbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1176,7 +1622,9 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lname_value;
+    private javax.swing.JButton logged_in_history;
     private javax.swing.JButton logged_in_modify;
     private javax.swing.JLabel logged_in_msg;
     private javax.swing.JLabel logged_in_username;
@@ -1209,6 +1657,7 @@ public class CCTProjectUI extends javax.swing.JFrame implements sqlConnection {
     private javax.swing.JPanel panel_4;
     private javax.swing.JPanel panel_5;
     private javax.swing.JPanel panel_6;
+    private javax.swing.JPanel panel_7;
     private javax.swing.JPasswordField pass_value;
     private javax.swing.JButton sign_out_2;
     private javax.swing.JButton sign_out_3;

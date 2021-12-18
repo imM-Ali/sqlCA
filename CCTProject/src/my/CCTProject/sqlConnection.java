@@ -20,7 +20,7 @@ public interface sqlConnection {
     public static Connection connectDB() throws SQLException {
         String dbURL = "jdbc:mysql://localhost:3306/users";
         String username = "root";
-        String password = "admin";
+        String password = "admin123";
         Connection conn;
         conn = DriverManager.getConnection(dbURL, username, password);
         return conn;
