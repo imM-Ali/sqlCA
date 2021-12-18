@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: localhost    Database: users
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,33 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `types`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `userType` int DEFAULT NULL,
-  `first_Name` varchar(50) DEFAULT NULL,
-  `last_Name` varchar(50) DEFAULT NULL,
-  `userName` varchar(15) DEFAULT NULL,
-  `password` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `userType` (`userType`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`userType`) REFERENCES `types` (`userType`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `types` (
+  `userType` int NOT NULL,
+  `Define` varchar(25) NOT NULL,
+  PRIMARY KEY (`userType`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `types`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'poooter','College','cct','admin'),(2,2,'ali','shahzaib','ali','123');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `types` WRITE;
+/*!40000 ALTER TABLE `types` DISABLE KEYS */;
+INSERT INTO `types` VALUES (1,'admin'),(2,'member');
+/*!40000 ALTER TABLE `types` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-08 23:18:59
+-- Dump completed on 2021-12-18  3:44:49
